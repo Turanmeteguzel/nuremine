@@ -1,0 +1,2435 @@
+<!doctype html>
+
+<html class="scroll-smooth" lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Falez | Nur &amp; Can</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,400&amp;family=Manrope:wght@200;300;400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#1e2230",
+              "error-dim": "#6b2a22",
+              "inverse-primary": "#0f0f14",
+              "secondary-dim": "#4a3d2e",
+              "primary-container": "#2a2418",
+              "on-surface-variant": "#9a9488",
+              primary: "#d4b978",
+              "on-tertiary-fixed-variant": "#6b7cab",
+              "surface-variant": "#2a2a34",
+              "tertiary-fixed": "#1a1f2c",
+              "on-primary-fixed-variant": "#c9a85a",
+              "surface-container-highest": "#2c2c38",
+              "on-secondary-fixed": "#e8e2d8",
+              "surface-container-low": "#18181f",
+              "on-error-container": "#f0c4bc",
+              "primary-fixed": "#2a2218",
+              "error-container": "#3d2220",
+              "on-error": "#0f0f14",
+              "on-background": "#e6e0d6",
+              "secondary-fixed-dim": "#2a1e18",
+              "secondary-container": "#2a2a32",
+              "surface-bright": "#24242e",
+              "tertiary-container": "#1e2434",
+              "on-secondary": "#0f0f12",
+              "on-primary-container": "#e8c878",
+              outline: "#4a4438",
+              background: "#0f0f14",
+              "outline-variant": "#353340",
+              "on-tertiary": "#e4dfd6",
+              "on-primary": "#121018",
+              "on-secondary-container": "#b8a99c",
+              "surface-tint": "#c97b4a",
+              secondary: "#c97b4a",
+              "primary-dim": "#b89a5c",
+              "on-secondary-fixed-variant": "#8a5c42",
+              surface: "#1a1a22",
+              "on-surface": "#e8e2d8",
+              "on-tertiary-container": "#8fa0c4",
+              "inverse-surface": "#e8e2d8",
+              "surface-container-high": "#22222c",
+              "on-primary-fixed": "#d4b978",
+              "on-tertiary-fixed": "#7a8ab8",
+              "tertiary-fixed-dim": "#1a1d28",
+              "inverse-on-surface": "#0f0f14",
+              "surface-dim": "#12121a",
+              error: "#c75c4a",
+              "surface-container-lowest": "#0f0f14",
+              "surface-container": "#1a1a22",
+              tertiary: "#6b7cab",
+              "tertiary-dim": "#4f5c82",
+              "primary-fixed-dim": "#3d3420",
+            },
+            fontFamily: {
+              headline: ["Noto Serif"],
+              body: ["Manrope"],
+              label: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0rem",
+              lg: "0rem",
+              xl: "0rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Manrope", sans-serif;
+      }
+      body.invitation-falez {
+        background-color: #0f0f14;
+        background-image: linear-gradient(
+          180deg,
+          #0f0f14 0%,
+          #12121a 32%,
+          #151520 60%,
+          #101018 100%
+        );
+        background-attachment: fixed;
+      }
+      .serif {
+        font-family: "Noto Serif", serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 200,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      /* Luxury Seri 2 — davetiye açılışı + geri sayım yardımcıları */
+      
+      #luxury2-loader {
+        transition:
+          opacity 0.55s ease,
+          visibility 0.55s ease;
+      }
+      
+      /* Tıksız açılış: CTA gizli, intro videosu otomatik oynar */
+      #luxury2-loader[data-loader-auto-start="true"] .luxury2-loader__content {
+        display: none !important;
+      }
+      
+      /* Inline gate: video yuklenene kadar bulanik + duraklatilmis kare; tiklayinca net + oynat */
+      #luxury2-loader.luxury2-loader--awaiting-tap > video {
+        filter: blur(4px) brightness(0.85) saturate(0.96);
+        transform: scale(1.015);
+        transition:
+          filter 0.6s ease,
+          transform 0.6s ease;
+        will-change: filter, transform;
+      }
+      
+      #luxury2-loader.luxury2-loader--playing > video {
+        filter: none;
+        transform: none;
+        will-change: auto;
+      }
+      
+      #luxury2-loader.luxury2-loader--playing .luxury2-loader__content {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+      }
+      
+      /* Videonun üstündeki açık renk peçe; yalnızca bekleme aşamasında — açılınca kalkmalı */
+      .luxury2-loader__veil {
+        pointer-events: none;
+        transition: opacity 0.55s ease;
+      }
+      
+      #luxury2-loader.luxury2-loader--playing .luxury2-loader__veil {
+        opacity: 0;
+      }
+      
+      #luxury2-loader.luxury2-loader--hide {
+        opacity: 0 !important;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      
+      .luxury2-loader__content {
+        transform: translate3d(0, -24vh, 0);
+      }
+      
+      #luxury2-loader[data-inline-gate="true"] .luxury2-loader__content {
+        transform: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: min(100%, 22rem);
+        margin-inline: auto;
+      }
+      
+      .luxury2-loader-rings-wrap {
+        animation: luxury2-rings 2.4s ease-in-out infinite;
+      }
+      
+      [data-luxury2-reveal] {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+      }
+      
+      [data-luxury2-reveal].is-visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+      
+      [data-luxury2-reveal][data-reveal-delay="1"] {
+        transition-delay: 0.08s;
+      }
+      
+      [data-luxury2-reveal][data-reveal-delay="2"] {
+        transition-delay: 0.14s;
+      }
+      
+      [data-luxury2-reveal][data-reveal-delay="3"] {
+        transition-delay: 0.2s;
+      }
+      
+      .luxury2-scroll-cue {
+        animation: luxury2-scroll-cue 2.8s ease-in-out infinite;
+      }
+      
+      @keyframes luxury2-scroll-cue {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(0, 7px, 0);
+        }
+      }
+      
+      .luxury2-gallery-image {
+        filter: grayscale(0.4);
+        transition:
+          filter 0.9s ease,
+          transform 1s ease,
+          box-shadow 1s ease;
+      }
+      
+      .luxury2-gallery-image:hover {
+        filter: grayscale(0.12);
+      }
+      
+      @keyframes luxury2-rings {
+        0%,
+        100% {
+          opacity: 0.88;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.04);
+        }
+      }
+      
+      /* Geri sayım: tek satır, kompakt */
+      .luxury2-countdown-row {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: clamp(0.75rem, 4vw, 2rem);
+        max-width: 28rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .luxury2-countdown-unit {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+      }
+      
+      .luxury2-countdown-value {
+        font-variant-numeric: tabular-nums;
+        line-height: 1.1;
+      }
+      
+      /* Arka plan müziği (Lüks 1 ile aynı davranış) */
+      .luxury2-nav {
+        background: transparent;
+        backdrop-filter: blur(0);
+        box-shadow: none;
+        transition:
+          background-color 0.35s ease,
+          backdrop-filter 0.35s ease,
+          box-shadow 0.35s ease,
+          padding 0.35s ease;
+      }
+      
+      .luxury2-nav__brand,
+      .luxury2-nav__link {
+        opacity: 0;
+        transform: translate3d(0, -6px, 0);
+        transition:
+          opacity 0.28s ease,
+          transform 0.35s ease,
+          color 0.25s ease;
+      }
+      
+      .luxury2-nav.is-scrolled {
+        background: rgba(250, 249, 246, 0.82);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 10px 30px rgba(55, 46, 40, 0.08);
+      }
+      
+      .luxury2-nav.is-scrolled .luxury2-nav__brand,
+      .luxury2-nav.is-scrolled .luxury2-nav__link {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+      
+      .music-toggle-lux2 {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 120;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 54px;
+        height: 54px;
+        padding: 0;
+        border-radius: 999px;
+        border: 1px solid rgba(167, 154, 145, 0.28);
+        background: rgba(250, 249, 246, 0.84);
+        backdrop-filter: blur(16px);
+        color: #5f5e5e;
+        box-shadow:
+          0 18px 42px rgba(55, 46, 40, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s ease,
+          background 0.35s ease,
+          color 0.35s ease,
+          box-shadow 0.35s ease,
+          opacity 0.25s ease,
+          visibility 0.25s ease;
+      }
+      
+      .music-toggle-lux2.music-toggle-lux2--hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      
+      .music-toggle-lux2:hover {
+        transform: translateY(-2px);
+        border-color: rgba(116, 92, 0, 0.28);
+        background: rgba(255, 251, 245, 0.92);
+        box-shadow:
+          0 20px 46px rgba(55, 46, 40, 0.16),
+          inset 0 1px 0 rgba(255, 255, 255, 0.86);
+      }
+      
+      .music-toggle-lux2__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #f6efe7 0%, #ece3d8 100%);
+        color: #745c00;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.92),
+          0 10px 24px rgba(116, 92, 0, 0.12);
+      }
+      
+      .music-toggle-lux2__badge svg {
+        width: 19px;
+        height: 19px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+      }
+      
+      .music-toggle-lux2.is-paused .music-toggle-lux2__badge {
+        background: linear-gradient(180deg, #f3f1ee 0%, #e8e4de 100%);
+        color: rgba(95, 94, 94, 0.72);
+      }
+      
+      .music-toggle-lux2.is-paused .music-toggle-lux2__badge svg {
+        transform: scale(0.96);
+        opacity: 0.72;
+      }
+      
+      .music-toggle-lux2.is-playing .music-toggle-lux2__badge svg {
+        animation: luxury2-music-pulse 2.1s ease-in-out infinite;
+      }
+      
+      @keyframes luxury2-music-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.9;
+        }
+        50% {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+      }
+      
+      @media (max-width: 640px) {
+        .luxury2-loader__content {
+          transform: translate3d(0, -18vh, 0);
+        }
+      
+        .music-toggle-lux2 {
+          right: 14px;
+          bottom: 14px;
+          width: 50px;
+          height: 50px;
+        }
+      
+        .music-toggle-lux2__badge {
+          width: 34px;
+          height: 34px;
+        }
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        [data-luxury2-reveal] {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      
+        .luxury2-scroll-cue {
+          animation: none;
+        }
+      
+        .luxury2-gallery-image {
+          transition: none;
+        }
+      }
+      
+    </style>
+<style>
+      /* Falez: Luxury Sunset — koyu lacivert zemin, altın & gün batımı vurgular */
+      body.invitation-falez .luxury2-nav.is-scrolled {
+        background: rgba(15, 15, 20, 0.94);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+        border-bottom: 1px solid rgba(212, 185, 120, 0.1);
+      }
+      body.invitation-falez .music-toggle-lux2 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.5rem;
+        height: 3.5rem;
+        padding: 0;
+        border-color: rgba(212, 185, 120, 0.28);
+        background:
+          linear-gradient(180deg, rgba(32, 30, 40, 0.96) 0%, rgba(20, 18, 28, 0.94) 100%);
+        color: #c9a85a;
+        box-shadow:
+          0 18px 44px rgba(0, 0, 0, 0.45),
+          inset 0 0 0 1px rgba(212, 185, 120, 0.12);
+        backdrop-filter: blur(16px);
+      }
+      body.invitation-falez .music-toggle-lux2:hover {
+        border-color: rgba(201, 123, 74, 0.45);
+        background:
+          linear-gradient(180deg, rgba(38, 34, 48, 0.98) 0%, rgba(24, 22, 32, 0.95) 100%);
+        transform: translateY(-2px);
+      }
+      body.invitation-falez .music-toggle-lux2__badge {
+        height: 2.25rem;
+        width: 2.25rem;
+        background: linear-gradient(180deg, #2a2620 0%, #1a1814 100%);
+        color: #d4b978;
+        box-shadow: inset 0 0 0 1px rgba(212, 185, 120, 0.2);
+      }
+      body.invitation-falez .music-toggle-lux2.is-paused .music-toggle-lux2__badge {
+        background: linear-gradient(180deg, #2a1e1c 0%, #1f1518 100%);
+        color: #c97b4a;
+      }
+      body.invitation-falez .wedding-loader-open-btn {
+        position: relative;
+        min-width: 220px;
+        padding: 16px 28px;
+        border-radius: 9999px;
+        border: 1px solid rgba(212, 185, 120, 0.48);
+        background: linear-gradient(
+          165deg,
+          rgba(201, 123, 74, 0.42) 0%,
+          rgba(32, 28, 44, 0.96) 45%,
+          rgba(20, 18, 30, 0.98) 100%
+        );
+        color: #d4b978;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow:
+          0 20px 52px rgba(0, 0, 0, 0.5),
+          inset 0 0 0 1px rgba(212, 185, 120, 0.2),
+          0 0 0 6px rgba(15, 15, 20, 0.65);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border-color 0.2s ease,
+          color 0.2s ease;
+      }
+      body.invitation-falez .wedding-loader-open-btn::before {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+      }
+      body.invitation-falez .wedding-loader-open-btn:hover {
+        transform: translateY(-2px);
+        border-color: rgba(212, 185, 120, 0.7);
+        color: #e8c878;
+        box-shadow:
+          0 26px 64px rgba(0, 0, 0, 0.55),
+          inset 0 0 0 1px rgba(212, 185, 120, 0.28);
+      }
+      body.invitation-falez .wedding-loader-open-btn:focus-visible {
+        outline: 2px solid rgba(212, 185, 120, 0.7);
+        outline-offset: 3px;
+      }
+      body.invitation-falez .yuva-toned-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at top left, rgba(212, 120, 72, 0.08), transparent 38%),
+          radial-gradient(circle at 80% 20%, rgba(107, 124, 171, 0.06), transparent 40%),
+          radial-gradient(circle at bottom right, rgba(15, 15, 22, 0.5), transparent 42%);
+        opacity: 0.95;
+      }
+      body.invitation-falez .yuva-section-seam {
+        position: absolute;
+        inset-inline: 0;
+        bottom: -5.5rem;
+        height: 22rem;
+        pointer-events: none;
+        filter: blur(72px);
+        opacity: 1;
+      }
+      body.invitation-falez .yuva-section-seam--blush-sage {
+        background:
+          radial-gradient(ellipse at center, rgba(201, 123, 74, 0.22) 0%, rgba(40, 32, 28, 0.12) 32%, rgba(15, 15, 20, 0.04) 60%, transparent 92%),
+          linear-gradient(180deg, rgba(201, 123, 74, 0) 0%, rgba(26, 22, 30, 0.25) 50%, rgba(15, 15, 20, 0.55) 100%);
+      }
+      body.invitation-falez .yuva-section-seam--sage-stone {
+        background:
+          radial-gradient(ellipse at center, rgba(107, 124, 171, 0.12) 0%, rgba(30, 34, 48, 0.2) 40%, transparent 90%),
+          linear-gradient(180deg, rgba(26, 30, 42, 0) 0%, rgba(20, 22, 32, 0.35) 55%, rgba(15, 15, 20, 0.6) 100%);
+      }
+      body.invitation-falez .yuva-section-seam--stone-plum {
+        background:
+          radial-gradient(ellipse at center, rgba(212, 185, 120, 0.1) 0%, rgba(35, 32, 44, 0.24) 45%, transparent 90%),
+          linear-gradient(180deg, rgba(24, 22, 32, 0) 0%, rgba(18, 18, 26, 0.4) 100%);
+      }
+      body.invitation-falez .yuva-section-seam--plum-mist {
+        background:
+          radial-gradient(ellipse at center, rgba(90, 70, 120, 0.08) 0%, rgba(20, 20, 30, 0.3) 50%, transparent 90%),
+          linear-gradient(180deg, rgba(20, 18, 28, 0) 0%, rgba(15, 15, 22, 0.5) 100%);
+      }
+      body.invitation-falez .yuva-section-seam--mist-forest {
+        background:
+          radial-gradient(ellipse at center, rgba(107, 124, 171, 0.1) 0%, rgba(25, 28, 40, 0.22) 45%, transparent 90%),
+          linear-gradient(180deg, rgba(18, 22, 32, 0) 0%, rgba(15, 15, 20, 0.55) 100%);
+      }
+      body.invitation-falez .yuva-section-seam--forest-footer {
+        background:
+          radial-gradient(ellipse at center, rgba(212, 160, 90, 0.08) 0%, rgba(30, 28, 36, 0.28) 48%, transparent 90%),
+          linear-gradient(180deg, rgba(20, 20, 28, 0) 0%, rgba(15, 15, 20, 0.65) 100%);
+      }
+      body.invitation-falez .yuva-surface {
+        background:
+          linear-gradient(180deg, rgba(35, 34, 44, 0.92) 0%, rgba(22, 22, 32, 0.94) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.2);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(16px);
+      }
+      body.invitation-falez .yuva-section-blush {
+        background:
+          radial-gradient(circle at top, rgba(201, 123, 74, 0.14), transparent 32%),
+          linear-gradient(180deg, #121018 0%, #18141c 48%, #1a1a22 100%);
+      }
+      body.invitation-falez .yuva-section-sage {
+        background:
+          radial-gradient(circle at top right, rgba(107, 124, 171, 0.1), transparent 32%),
+          linear-gradient(180deg, #10141e 0%, #141a24 44%, #1a1a22 100%);
+      }
+      body.invitation-falez .yuva-section-stone {
+        background:
+          radial-gradient(circle at top left, rgba(212, 185, 120, 0.06), transparent 28%),
+          linear-gradient(180deg, #0f1118 0%, #151820 46%, #1a1a22 100%);
+      }
+      body.invitation-falez .yuva-section-plum {
+        background:
+          radial-gradient(circle at top, rgba(100, 80, 120, 0.08), transparent 30%),
+          linear-gradient(180deg, #12101a 0%, #181622 52%, #1a1a22 100%);
+      }
+      body.invitation-falez .yuva-section-mist {
+        background:
+          radial-gradient(circle at top right, rgba(90, 110, 160, 0.08), transparent 30%),
+          linear-gradient(180deg, #0f1018 0%, #141820 46%, #1a1a22 100%);
+      }
+      body.invitation-falez .yuva-section-forest {
+        background:
+          radial-gradient(circle at top left, rgba(201, 123, 74, 0.07), transparent 32%),
+          linear-gradient(180deg, #0e1016 0%, #151a22 42%, #1a1a22 100%);
+      }
+      body.invitation-falez .yuva-section-footer {
+        background:
+          radial-gradient(circle at top, rgba(212, 185, 120, 0.05), transparent 28%),
+          linear-gradient(180deg, #101018 0%, #14141c 45%, #0f0f14 100%);
+      }
+      body.invitation-falez .yuva-card {
+        background:
+          linear-gradient(180deg, rgba(36, 36, 46, 0.95) 0%, rgba(24, 24, 34, 0.96) 100%);
+        border-color: rgba(212, 185, 120, 0.18);
+        box-shadow: 0 22px 56px rgba(0, 0, 0, 0.4);
+      }
+      body.invitation-falez .yuva-card--sage {
+        background:
+          linear-gradient(180deg, rgba(28, 32, 48, 0.96) 0%, rgba(20, 24, 38, 0.97) 100%);
+        border-color: rgba(107, 124, 171, 0.25);
+      }
+      body.invitation-falez .luxury2-nav:not(.is-scrolled) .luxury2-nav__brand,
+      body.invitation-falez .luxury2-nav:not(.is-scrolled) .luxury2-nav__link {
+        color: rgba(255, 255, 255, 0.94);
+      }
+      body.invitation-falez .luxury2-nav:not(.is-scrolled) .luxury2-nav__link:hover {
+        color: #f0d9a0;
+      }
+      body.invitation-falez .yuva-hero-shell {
+        background:
+          linear-gradient(180deg, rgba(18, 14, 22, 0.4) 0%, rgba(12, 10, 18, 0.32) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.22);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+      body.invitation-falez .yuva-hero-kicker {
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+      }
+      body.invitation-falez .yuva-gallery-frame {
+        background:
+          linear-gradient(180deg, rgba(32, 32, 42, 0.94) 0%, rgba(22, 22, 32, 0.95) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.16);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(16px);
+      }
+      body.invitation-falez .yuva-gallery-photo {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.55rem;
+        padding: 0.65rem;
+        background: linear-gradient(
+          160deg,
+          rgba(55, 50, 66, 0.45) 0%,
+          rgba(22, 20, 32, 0.95) 42%,
+          rgba(10, 9, 16, 0.99) 100%
+        );
+        border: 1px solid rgba(212, 185, 120, 0.32);
+        box-shadow:
+          0 22px 56px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(212, 185, 120, 0.1),
+          0 1px 0 rgba(255, 255, 255, 0.05) inset,
+          0 0 28px rgba(212, 185, 120, 0.08);
+        isolation: isolate;
+      }
+      body.invitation-falez .yuva-gallery-photo::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        inset: 0.4rem;
+        border-radius: 0.32rem;
+        border: 1px solid rgba(212, 185, 120, 0.22);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+        pointer-events: none;
+      }
+      body.invitation-falez .yuva-gallery-photo img {
+        position: relative;
+        z-index: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.28rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        transition: transform 900ms ease, filter 900ms ease, box-shadow 900ms ease;
+      }
+      body.invitation-falez .yuva-gallery-photo:hover {
+        box-shadow:
+          0 28px 64px rgba(0, 0, 0, 0.58),
+          0 0 0 1px rgba(212, 185, 120, 0.18),
+          0 0 40px rgba(201, 123, 74, 0.12);
+      }
+      body.invitation-falez .yuva-gallery-photo:hover::before {
+        border-color: rgba(230, 200, 130, 0.35);
+      }
+      body.invitation-falez .yuva-gallery-photo:hover img {
+        transform: scale(1.03);
+        filter: saturate(1.06) contrast(1.02);
+        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45);
+      }
+      body.invitation-falez .yuva-timeline-shell {
+        background:
+          linear-gradient(180deg, rgba(32, 32, 42, 0.92) 0%, rgba(22, 24, 34, 0.94) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.16);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(14px);
+      }
+      body.invitation-falez .yuva-timeline-card {
+        background:
+          linear-gradient(180deg, rgba(38, 36, 48, 0.96) 0%, rgba(24, 24, 36, 0.97) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.15);
+        box-shadow: 0 22px 58px rgba(0, 0, 0, 0.38);
+      }
+      body.invitation-falez .yuva-timeline-card--sage {
+        background:
+          linear-gradient(180deg, rgba(28, 34, 52, 0.97) 0%, rgba(20, 24, 40, 0.98) 100%);
+        border-color: rgba(107, 124, 171, 0.22);
+      }
+      body.invitation-falez .yuva-timeline-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 92px;
+        padding: 0.6rem 1rem;
+        border: 1px solid rgba(212, 185, 120, 0.28);
+        background: rgba(20, 20, 30, 0.85);
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: #d4b978;
+      }
+      body.invitation-falez .yuva-timeline-marker {
+        height: 12px;
+        width: 12px;
+        border-radius: 9999px;
+        border: 1px solid rgba(212, 185, 120, 0.45);
+        background: rgba(15, 15, 20, 0.9);
+        box-shadow: 0 0 0 8px rgba(201, 123, 74, 0.12);
+      }
+      body.invitation-falez .yuva-svg-black {
+        color: rgba(212, 185, 120, 0.78);
+        opacity: 1;
+      }
+      body.invitation-falez .yuva-svg-black-soft {
+        color: rgba(212, 185, 120, 0.65);
+        opacity: 0.85;
+      }
+      body.invitation-falez .yuva-svg-black-fine {
+        color: rgba(212, 185, 120, 0.7);
+        opacity: 0.88;
+      }
+      body.invitation-falez .yuva-footer-panel {
+        background:
+          linear-gradient(180deg, rgba(30, 30, 40, 0.95) 0%, rgba(18, 18, 28, 0.96) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.16);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(18px);
+      }
+      body.invitation-falez .yuva-footer-monogram {
+        display: inline-flex;
+        align-items: flex-end;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        min-width: 5rem;
+        padding: 0.35rem 0.5rem 0.15rem;
+        border-radius: 1.1rem;
+        border: 1px solid rgba(212, 185, 120, 0.35);
+        background: linear-gradient(160deg, rgba(28, 26, 36, 0.95) 0%, rgba(16, 16, 24, 0.98) 100%);
+        box-shadow: inset 0 0 0 6px rgba(212, 185, 120, 0.06);
+      }
+      body.invitation-falez .yuva-footer-monogram img {
+        display: block;
+        height: 7rem;
+        width: auto;
+        max-width: 6.5rem;
+        object-fit: contain;
+        object-position: center bottom;
+      }
+      @media (min-width: 768px) {
+        body.invitation-falez .yuva-footer-monogram img {
+          height: 8rem;
+          max-width: 7.5rem;
+        }
+      }
+      body.invitation-falez .yuva-footer-names {
+        color: #e8e2d8;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      body.invitation-falez .yuva-map-venue {
+        background:
+          linear-gradient(160deg, rgba(18, 22, 38, 0.98) 0%, rgba(20, 18, 32, 0.96) 45%, rgba(32, 28, 48, 0.94) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.12);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+      }
+      body.invitation-falez .yuva-map-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 0.7rem 1rem;
+        font-size: 10px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      body.invitation-falez .yuva-map-frame {
+        background:
+          linear-gradient(180deg, rgba(28, 28, 38, 0.95) 0%, rgba(18, 18, 28, 0.97) 100%);
+        border: 1px solid rgba(212, 185, 120, 0.16);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+      }
+      body.invitation-falez .yuva-story-photo {
+        position: relative;
+        margin-inline: auto;
+        max-width: 54rem;
+        border-radius: 0.6rem;
+        padding: 0.75rem;
+        background: linear-gradient(
+          165deg,
+          rgba(50, 46, 62, 0.5) 0%,
+          rgba(20, 18, 30, 0.98) 100%
+        );
+        border: 1px solid rgba(212, 185, 120, 0.3);
+        box-shadow:
+          0 26px 80px rgba(0, 0, 0, 0.52),
+          0 0 0 1px rgba(212, 185, 120, 0.1),
+          0 1px 0 rgba(255, 255, 255, 0.04) inset,
+          0 0 32px rgba(212, 185, 120, 0.07);
+        isolation: isolate;
+      }
+      body.invitation-falez .yuva-story-photo::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        inset: 0.5rem;
+        border-radius: 0.4rem;
+        border: 1px solid rgba(212, 185, 120, 0.2);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+      }
+      body.invitation-falez .yuva-story-photo img {
+        position: relative;
+        z-index: 0;
+        display: block;
+        width: 100%;
+        border-radius: 0.35rem;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+      /* Her kutuda canvas + kazıma katmanı: buket PNG (assets/falez-scratch-overlay.png) */
+      body.invitation-falez .falez-countdown {
+        max-width: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      body.invitation-falez .falez-countdown-heading-art img {
+        height: 4.5rem;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+      }
+      @media (min-width: 640px) {
+        body.invitation-falez .falez-countdown-heading-art img {
+          height: 5.25rem;
+        }
+      }
+      body.invitation-falez .falez-countdown-shell {
+        position: relative;
+        overflow: hidden;
+        margin-top: 0.5rem;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(212, 185, 120, 0.16);
+        background: linear-gradient(180deg, rgba(32, 32, 42, 0.35) 0%, rgba(16, 16, 24, 0.55) 100%);
+        box-shadow: inset 0 1px 0 rgba(212, 185, 120, 0.06);
+        padding: 1.25rem 0.9rem 1.35rem;
+      }
+      /* Üst: gün+saat | alt: dakika+saniye (Sahil’de 2×2 → md’de 4 sütun; Falez 2×2 kalır) */
+      body.invitation-falez .falez-countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.7rem;
+        max-width: 22rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @media (min-width: 640px) {
+        body.invitation-falez .falez-countdown-grid {
+          gap: 0.9rem;
+        }
+      }
+      body.invitation-falez .falez-countdown-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.1rem;
+        border: 1px solid rgba(212, 185, 120, 0.2);
+        background:
+          linear-gradient(165deg, rgba(40, 38, 52, 0.85) 0%, rgba(20, 20, 32, 0.92) 100%);
+        padding: 0.95rem 0.6rem 0.88rem;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+        text-align: center;
+      }
+      body.invitation-falez .falez-countdown-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      body.invitation-falez .falez-countdown-scratch {
+        position: absolute;
+        inset: 0 auto auto 50%;
+        width: 108%;
+        height: 78%;
+        transform: translateX(-50%);
+        z-index: 2;
+        touch-action: none;
+        cursor: pointer;
+      }
+      body.invitation-falez .falez-countdown-value {
+        display: block;
+        font-family: "Noto Serif", serif;
+        font-size: clamp(1.9rem, 5.2vw, 2.65rem);
+        line-height: 0.95;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: #e8c878;
+        text-shadow: 0 2px 20px rgba(212, 185, 120, 0.12);
+      }
+      body.invitation-falez .falez-countdown-label {
+        display: block;
+        margin-top: 0.45rem;
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(196, 190, 178, 0.72);
+      }
+      @media (min-width: 640px) {
+        body.invitation-falez .falez-countdown-label {
+          font-size: 10px;
+        }
+      }
+    </style>
+    <style>
+      body.loading {
+        overflow: hidden;
+      }
+
+      #intro-video-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: linear-gradient(180deg, #0f0f14 0%, #1a1418 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+        overflow: hidden;
+      }
+
+      #intro-video-loader video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(5px) brightness(0.82) saturate(0.96);
+        transform: scale(1.03);
+        transition:
+          filter 0.45s ease,
+          transform 0.45s ease;
+      }
+
+      #intro-video-loader.is-playing video {
+        filter: none;
+        transform: none;
+      }
+
+      .intro-video-loader__gate {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: rgba(15, 15, 20, 0.18);
+        backdrop-filter: blur(2px);
+        transition:
+          opacity 0.45s ease,
+          visibility 0.45s ease;
+      }
+
+      .intro-video-loader__gate.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .intro-video-loader__button {
+        border: 1px solid rgba(212, 185, 120, 0.45);
+        border-radius: 9999px;
+        background: linear-gradient(180deg, rgba(34, 28, 31, 0.94) 0%, rgba(20, 15, 18, 0.98) 100%);
+        color: #fff;
+        padding: 0.95rem 1.65rem;
+        font-family: "Manrope", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        box-shadow:
+          0 22px 56px rgba(0, 0, 0, 0.28),
+          0 0 0 10px rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .intro-video-loader__button:hover {
+        transform: translateY(-1px);
+        box-shadow:
+          0 26px 62px rgba(0, 0, 0, 0.34),
+          0 0 0 10px rgba(255, 255, 255, 0.12);
+      }
+
+      .hero-content {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease;
+      }
+
+      .hero-content.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body
+    class="loading invitation-falez text-on-background selection:bg-primary/25 selection:text-on-surface"
+  >
+    <!-- INTRO VIDEO LOADER -->
+    <div id="intro-video-loader">
+      <video
+        id="introVideo"
+        playsinline
+        webkit-playsinline
+        muted
+        preload="auto"
+      >
+        <source
+          src="https://res.cloudinary.com/dnklvd00a/video/upload/q_auto,f_auto,w_720/v1777321236/kling_20260423_%E4%BD%9C%E5%93%81_A_vertical_5781_0_1_1_lkoces.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="intro-video-loader__gate" id="introGate">
+        <button class="intro-video-loader__button" id="introGateButton" type="button">
+          Davetiyeyi Aç
+        </button>
+      </div>
+    </div>
+    <script>
+      window.__weddingInvitationGateEnabled = true;
+      document.addEventListener("DOMContentLoaded", () => {
+        const intro = document.getElementById("intro-video-loader");
+        const video = document.getElementById("introVideo");
+        const gate = document.getElementById("introGate");
+        const gateButton = document.getElementById("introGateButton");
+        const pageAudio = document.getElementById("pageAudio");
+
+        if (!video || !intro) {
+          document.body.classList.remove("loading");
+          document.querySelector(".hero-content")?.classList.add("show");
+          return;
+        }
+
+        let finished = false;
+        const finishIntro = () => {
+          if (finished) return;
+          finished = true;
+          video.pause();
+          video.currentTime = 0;
+          document.body.classList.remove("loading");
+          intro.style.opacity = "0";
+          setTimeout(() => {
+            intro.style.display = "none";
+            document.querySelector(".hero-content")?.classList.add("show");
+          }, 600);
+        };
+
+        const playVideo = () => {
+          const p = video.play();
+
+          if (p !== undefined) {
+            p.catch(() => {
+              const start = () => {
+                video.play();
+                document.removeEventListener("touchstart", start);
+              };
+              document.addEventListener("touchstart", start);
+            });
+          }
+        };
+
+        let started = false;
+        const startInvitation = () => {
+          if (started) return;
+          started = true;
+
+          window.__weddingInvitationOpened = true;
+          window.dispatchEvent(new CustomEvent("wedding:open"));
+
+          gate?.classList.add("is-hidden");
+          intro.classList.add("is-playing");
+
+          if (pageAudio) {
+            pageAudio.play().catch(() => {});
+          }
+
+          playVideo();
+        };
+
+        if (gateButton) {
+          gateButton.addEventListener("click", startInvitation, { once: true });
+          gateButton.addEventListener("touchstart", startInvitation, { once: true });
+        } else {
+          startInvitation();
+        }
+
+        video.addEventListener("ended", () => {
+          finishIntro();
+        });
+
+        video.addEventListener("timeupdate", () => {
+          if (video.duration && video.currentTime >= video.duration - 0.2) {
+            finishIntro();
+          }
+        });
+
+        video.addEventListener("error", () => {
+          finishIntro();
+        });
+      });
+    </script>
+    <!-- Top Navigation Shell -->
+    <nav
+      class="luxury2-nav fixed top-0 z-50 grid w-full grid-cols-[1fr_auto_1fr] items-center px-8 py-6 transition-all"
+      id="luxury2Nav"
+    >
+      <div class="min-w-0" aria-hidden="true"></div>
+      <div
+        class="luxury2-nav__brand shrink-0 text-center text-2xl font-serif uppercase tracking-widest text-on-surface"
+      >
+        N&amp;C
+      </div>
+      <div class="flex min-w-0 items-center justify-end gap-8">
+        <div class="hidden items-center gap-8 md:flex">
+          <a
+            class="luxury2-nav__link font-sans text-[10px] uppercase tracking-[0.15em] text-on-surface-variant transition-colors hover:text-on-surface"
+            href="#story"
+            >Hikayemiz</a
+          >
+          <a
+            class="luxury2-nav__link font-sans text-[10px] uppercase tracking-[0.15em] text-on-surface-variant transition-colors hover:text-on-surface"
+            href="#venue"
+            >Mekân</a
+          >
+          <a
+            class="luxury2-nav__link font-sans text-[10px] uppercase tracking-[0.15em] text-on-surface-variant transition-colors hover:text-on-surface"
+            href="#gallery"
+            >Galeri</a
+          >
+        </div>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <header
+      class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-24 px-6"
+    >
+      <div class="pointer-events-none absolute left-8 top-28 z-[1] hidden md:block opacity-55">
+        <svg
+          aria-hidden="true"
+          class="yuva-svg-black h-32 w-32"
+          fill="none"
+          viewBox="0 0 140 140"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="70" cy="70" r="38" stroke="currentColor" stroke-width="1" />
+          <path d="M70 20V42" stroke="currentColor" stroke-width="1" />
+          <path d="M70 98V120" stroke="currentColor" stroke-width="1" />
+          <path d="M20 70H42" stroke="currentColor" stroke-width="1" />
+          <path d="M98 70H120" stroke="currentColor" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="pointer-events-none absolute bottom-16 right-10 z-[1] hidden md:block opacity-80">
+        <img
+          class="h-36 w-36 object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+          src="assets/sahil-dove.png"
+          alt=""
+          width="144"
+          height="144"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </div>
+      <div class="absolute inset-0 z-0 bg-[#0f0f14]">
+        <video
+          class="absolute inset-0 h-full w-full min-h-full object-cover object-center"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source
+            src="https://res.cloudinary.com/dnklvd00a/video/upload/q_auto,f_auto,w_1280/v1777321692/kling_20260423_%E4%BD%9C%E5%93%81_A_high_ang_5689_0_online-video-cutter.com_1_jkjdav.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div
+          class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-5%,rgba(201,123,74,0.12),transparent_42%),radial-gradient(circle_at_top,rgba(100,80,180,0.05),transparent_30%),linear-gradient(180deg,rgba(8,10,24,0.3)_0%,rgba(20,16,32,0.35)_35%,rgba(15,15,20,0.45)_70%,rgba(10,8,16,0.64)_100%)]"
+        ></div>
+      </div>
+      <div class="hero-content relative z-10 mx-auto max-w-5xl text-center">
+        <p
+          class="yuva-hero-kicker mb-6 font-label text-[12px] uppercase tracking-[0.46em] text-white"
+        >
+          Evlenecekler
+        </p>
+        <h1
+          class="serif mb-8 text-6xl font-light tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.22)] md:text-8xl lg:text-9xl"
+        >
+          Nur &amp; Can
+        </h1>
+        <div
+          class="yuva-hero-shell flex flex-col items-center justify-center gap-8 px-7 py-9 md:flex-row md:gap-16 md:px-12 md:py-10"
+        >
+          <div class="text-center">
+            <p
+              class="mb-2 font-label text-[10px] uppercase tracking-[0.28em] text-white"
+            >
+              Tarih
+            </p>
+            <p class="serif text-xl text-white">24 Temmuz 2026</p>
+          </div>
+          <div class="hidden h-12 w-px bg-white/20 md:block"></div>
+          <div class="text-center">
+            <p
+              class="mb-2 font-label text-[10px] uppercase tracking-[0.28em] text-white"
+            >
+              Yer
+            </p>
+            <p class="serif text-xl text-white">
+              Alyans Düğün Salonu, Giresun
+            </p>
+          </div>
+        </div>
+        <p
+          class="mx-auto mt-8 max-w-2xl text-sm leading-7 text-white md:text-[15px]"
+        >
+          Hayatımızın en güzel günlerinden birinde, en sevdiklerimizle birlikte
+          aynı heyecanını paylaşacak olmak bizi çok mutlu ediyor.
+        </p>
+        <div class="mt-12 luxury2-scroll-cue">
+          <p
+            class="mb-1.5 font-label text-[10px] uppercase tracking-[0.3em] text-white"
+          >
+            Kaydır
+          </p>
+          <span
+            class="material-symbols-outlined text-3xl text-white"
+            data-icon="keyboard_double_arrow_down"
+            >keyboard_double_arrow_down</span
+          >
+        </div>
+      </div>
+    </header>
+    <!-- Geri sayım -->
+    <section
+      class="yuva-toned-section yuva-section-blush relative overflow-hidden py-16 md:py-20"
+      aria-label="Düğüne kalan süre"
+    >
+      <div class="mx-auto max-w-4xl px-6" data-luxury2-reveal>
+        <div class="yuva-surface rounded-[34px] px-6 py-10 text-center md:px-10 md:py-12">
+          <div class="falez-countdown mt-8 text-primary">
+            <div class="falez-countdown-heading-art mb-4 flex justify-center">
+              <img
+                class="select-none"
+                src="assets/falez-countdown-heading-rings.png"
+                alt=""
+                width="200"
+                height="200"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+            <h2
+              class="serif text-2xl leading-snug text-primary sm:text-3xl max-w-md mx-auto"
+            >
+              Kazı ve düğüne kalan
+              <span class="whitespace-nowrap"> süreyi gör</span>
+            </h2>
+            <div class="falez-countdown-shell text-center mt-5">
+              <div
+                class="falez-countdown-grid luxury2-countdown-row"
+                data-countdown="2026-07-24T19:00:00+03:00"
+              >
+                <div class="falez-countdown-card luxury2-countdown-unit">
+                  <canvas
+                    class="falez-countdown-scratch"
+                    data-scratch-shell="assets/falez-scratch-overlay.png"
+                    aria-hidden="true"
+                  ></canvas>
+                  <span
+                    class="falez-countdown-value luxury2-countdown-value tabular-nums"
+                    data-unit="days"
+                    >0</span
+                  >
+                  <span class="falez-countdown-label">Gün</span>
+                </div>
+                <div class="falez-countdown-card luxury2-countdown-unit">
+                  <canvas
+                    class="falez-countdown-scratch"
+                    data-scratch-shell="assets/falez-scratch-overlay.png"
+                    aria-hidden="true"
+                  ></canvas>
+                  <span
+                    class="falez-countdown-value luxury2-countdown-value tabular-nums"
+                    data-unit="hours"
+                    >00</span
+                  >
+                  <span class="falez-countdown-label">Saat</span>
+                </div>
+                <div class="falez-countdown-card luxury2-countdown-unit">
+                  <canvas
+                    class="falez-countdown-scratch"
+                    data-scratch-shell="assets/falez-scratch-overlay.png"
+                    aria-hidden="true"
+                  ></canvas>
+                  <span
+                    class="falez-countdown-value luxury2-countdown-value tabular-nums"
+                    data-unit="minutes"
+                    >00</span
+                  >
+                  <span class="falez-countdown-label">Dakika</span>
+                </div>
+                <div class="falez-countdown-card luxury2-countdown-unit">
+                  <canvas
+                    class="falez-countdown-scratch"
+                    data-scratch-shell="assets/falez-scratch-overlay.png"
+                    aria-hidden="true"
+                  ></canvas>
+                  <span
+                    class="falez-countdown-value luxury2-countdown-value tabular-nums"
+                    data-unit="seconds"
+                    >00</span
+                  >
+                  <span class="falez-countdown-label">Saniye</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="yuva-section-seam yuva-section-seam--blush-sage" aria-hidden="true"></div>
+    </section>
+    <!-- Event Info Section (Cards) -->
+    <section
+      class="yuva-toned-section yuva-section-sage relative overflow-hidden py-24 md:py-28"
+      id="venue"
+    >
+      <div class="relative max-w-7xl mx-auto px-6" data-luxury2-reveal>
+        <div class="yuva-timeline-shell mb-16 px-8 py-10 md:px-12 md:py-12">
+          <div class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-end">
+            <div>
+              <div class="pointer-events-none mb-3 block opacity-45">
+                <svg
+                  aria-hidden="true"
+                  class="yuva-svg-black h-16 w-16"
+                  fill="none"
+                  viewBox="0 0 96 96"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="36" cy="48" r="14" stroke="currentColor" stroke-width="1" />
+                  <circle cx="56" cy="48" r="14" stroke="currentColor" stroke-width="1" />
+                  <path d="M46 34V62" stroke="currentColor" stroke-width="1" />
+                </svg>
+              </div>
+              <span
+                class="font-label text-[10px] tracking-[0.4em] uppercase text-secondary"
+                >düğün akışı</span
+              >
+              <h2 class="serif mt-4 text-5xl text-primary">Tarih ve yer</h2>
+              <p class="mt-5 max-w-xl text-sm leading-7 text-on-surface-variant">
+                Bu özel günümüzün akışını, bizimle birlikte her anı kolayca
+                takip edebilmeniz için sevgiyle hazırladık.
+              </p>
+            </div>
+            <div class="md:justify-self-end">
+              <div class="border-t border-primary/12 pt-6 md:max-w-sm">
+                <p class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant">
+                  Bizim günümüz
+                </p>
+                <p class="mt-3 serif text-2xl leading-snug text-on-surface">
+                  En güzel anılarımızı sevdiklerimizle paylaştığımız özel bir
+                  buluşma.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-10 hidden items-center justify-center gap-4 md:flex">
+          <span class="yuva-timeline-marker"></span>
+          <div class="h-px w-24 bg-primary/18"></div>
+          <span class="yuva-timeline-marker"></span>
+        </div>
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+          <!-- Kına kartı -->
+          <div
+            class="yuva-timeline-card relative flex flex-col p-10 text-left md:p-12"
+          >
+            <div class="mb-7 flex items-center justify-between gap-4">
+              <span class="yuva-timeline-badge">22 Temmuz</span>
+              <div class="h-px flex-1 bg-primary/14"></div>
+            </div>
+            <span
+              class="material-symbols-outlined mb-6 text-4xl text-primary"
+              data-icon="celebration"
+              >celebration</span
+            >
+            <h3 class="serif text-3xl text-on-surface mb-3">Kına gecesi</h3>
+            <p
+              class="font-label text-[10px] tracking-[0.24em] uppercase text-on-surface-variant mb-6"
+            >
+              Saat 20:00
+            </p>
+            <p class="font-body text-on-surface-variant leading-loose mb-10">
+              Aile arasında kına eğlencesi<br />
+              Çamlıpınar Köyü<br />
+              Laçin, Çorum
+            </p>
+            <a
+              class="mt-auto inline-flex w-fit font-label text-[10px] tracking-[0.24em] uppercase text-primary border-b border-primary/20 pb-1 hover:border-primary transition-all"
+              href="https://share.google/ybcsLmCtSeeyKLaah"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Haritayı aç</a
+            >
+          </div>
+          <!-- Düğün kartı -->
+          <div
+            class="yuva-timeline-card relative flex flex-col p-10 text-left md:p-12"
+          >
+            <div class="mb-7 flex items-center justify-between gap-4">
+              <span class="yuva-timeline-badge">24 Temmuz</span>
+              <div class="h-px flex-1 bg-primary/14"></div>
+            </div>
+            <span
+              class="material-symbols-outlined mb-6 text-4xl text-primary"
+              data-icon="favorite"
+              >favorite</span
+            >
+            <h3 class="serif text-3xl text-on-surface mb-3">Düğün yeri</h3>
+            <p
+              class="font-label text-[10px] tracking-[0.24em] uppercase text-on-surface-variant mb-6"
+            >
+              Saat 19:00
+            </p>
+            <p class="font-body text-on-surface-variant leading-loose mb-10">
+              Nikâh ve düğün eğlencesi<br />
+              Alyans Düğün Salonu<br />
+              Giresun Merkez
+            </p>
+            <a
+              class="mt-auto inline-flex w-fit font-label text-[10px] tracking-[0.24em] uppercase text-primary border-b border-primary/20 pb-1 hover:border-primary transition-all"
+              href="https://www.google.com/maps/search/?api=1&amp;query=Alyans%20D%C3%BC%C4%9F%C3%BCn%20Salonu%20Giresun%20Merkez"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Haritayı aç</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="yuva-section-seam yuva-section-seam--sage-stone" aria-hidden="true"></div>
+    </section>
+    <!-- Map Section -->
+    <section
+      aria-label="Etkinlik konumu haritası"
+      class="yuva-toned-section yuva-section-stone relative overflow-hidden px-6 py-24 md:py-28"
+    >
+      <div class="pointer-events-none absolute right-0 top-0 z-[1] opacity-42">
+        <svg
+          aria-hidden="true"
+          class="h-40 w-40 text-primary/35"
+          fill="none"
+          viewBox="0 0 160 160"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M24 136C52 100 70 82 95 70C112 62 126 58 144 56" stroke="currentColor" stroke-width="1" />
+          <path d="M16 104C36 80 52 66 72 54C92 42 116 34 142 28" stroke="currentColor" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="max-w-7xl mx-auto" data-luxury2-reveal data-reveal-delay="1">
+        <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-12">
+          <div
+            class="yuva-map-venue lg:col-span-4 flex flex-col justify-between p-10 text-white md:p-12"
+          >
+            <div>
+              <span class="yuva-map-pill">
+                <span class="material-symbols-outlined !text-base" data-icon="location_on">location_on</span>
+                Konum
+              </span>
+              <h2 class="serif mb-5 mt-7 text-4xl text-white md:text-5xl">
+                Alyans Düğün Salonu
+              </h2>
+              <p class="mb-8 max-w-sm font-body leading-loose text-white/78">
+                Bu özel günümüzde bizimle olmanızı çok isteriz. Konum ve ulaşım
+                bilgilerine buradan kolayca ulaşabilirsiniz.
+              </p>
+            </div>
+            <div class="space-y-7">
+              <div class="rounded-[26px] border border-white/10 bg-white/6 px-6 py-6">
+                <p class="font-label mb-2 text-[10px] uppercase tracking-[0.24em] text-white/62">
+                  Adres
+                </p>
+                <p class="font-body leading-loose text-white">
+                  Alyans Düğün Salonu<br />
+                  Giresun Merkez
+                </p>
+              </div>
+              <a
+                class="inline-flex w-full items-center justify-center rounded-full border border-primary/35 bg-primary px-6 py-4 font-label text-[10px] uppercase tracking-[0.28em] text-on-primary transition-all hover:bg-primary-dim"
+                href="https://www.google.com/maps/search/?api=1&amp;query=Alyans%20D%C3%BC%C4%9F%C3%BCn%20Salonu%20Giresun%20Merkez"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Google Maps'te aç</a
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-8">
+            <div
+              class="yuva-map-frame relative p-4 md:-translate-y-6 md:p-5"
+            >
+              <div
+                class="relative overflow-hidden rounded-[28px] border border-primary/15 bg-surface-container-lowest"
+              >
+                <div
+                  class="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-[#0f0f14]/75 via-[#0f0f14]/25 to-transparent"
+                ></div>
+                <div class="pointer-events-none absolute left-5 top-5 z-10 rounded-full bg-black px-4 py-2 font-label text-[9px] uppercase tracking-[0.28em] text-white">
+                  Konum
+                </div>
+                <iframe
+                  class="h-[360px] w-full border-0 grayscale contrast-95 md:h-[460px]"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://maps.google.com/maps?q=Alyans%20D%C3%BC%C4%9F%C3%BCn%20Salonu%20Giresun%20Merkez&amp;z=16&amp;hl=tr&amp;output=embed"
+                  title="Alyans Düğün Salonu Giresun"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="yuva-section-seam yuva-section-seam--stone-plum" aria-hidden="true"></div>
+    </section>
+    <!-- RSVP Section -->
+    <section
+      class="yuva-toned-section yuva-section-plum relative overflow-hidden py-24 md:py-28"
+      id="rsvp"
+    >
+      <div class="pointer-events-none absolute left-1/2 top-12 z-[1] block -translate-x-1/2 overflow-visible opacity-45">
+        <svg
+          aria-hidden="true"
+          class="yuva-svg-black h-10 w-24 overflow-visible"
+          fill="none"
+          viewBox="26 -4 44 38"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M48 30C40 24 28 17 28 8C28 3 32 0 36 0C41 0 45 4 48 8C51 4 55 0 60 0C64 0 68 3 68 8C68 17 56 24 48 30Z" stroke="currentColor" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="max-w-2xl mx-auto px-6" data-luxury2-reveal data-reveal-delay="1">
+        <div class="text-center mb-16">
+          <h2 class="serif text-5xl text-primary mb-4">Katılım</h2>
+          <p class="font-body text-on-surface-variant">
+            Lütfen 1 Mayıs 2026 tarihine kadar yanıtınızı iletin.
+          </p>
+          <div class="mt-6 flex justify-center">
+            <svg
+              aria-hidden="true"
+              class="yuva-svg-black-fine h-5 w-40"
+              fill="none"
+              viewBox="0 0 160 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M4 10H60" stroke="currentColor" stroke-width="1" />
+              <path d="M100 10H156" stroke="currentColor" stroke-width="1" />
+              <path d="M80 5L85 10L80 15L75 10L80 5Z" stroke="currentColor" stroke-width="1" />
+            </svg>
+          </div>
+        </div>
+        <form
+          id="rsvp-form"
+          class="js-rsvp-wa yuva-surface space-y-12 px-6 py-10 md:px-10 md:py-12"
+          action="#"
+          novalidate
+        >
+          <div class="flex flex-col items-center pb-2">
+            <p
+              class="font-label text-[10px] tracking-[0.2em] uppercase text-on-surface-variant mb-6 text-center"
+            >
+              Katılacak mısınız?
+            </p>
+            <div class="flex flex-wrap justify-center gap-8 sm:gap-12">
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="hidden peer"
+                  name="attendance"
+                  type="radio"
+                  value="yes"
+                  checked
+                />
+                <div
+                  class="w-5 h-5 border border-outline-variant peer-checked:bg-primary transition-all"
+                ></div>
+                <span
+                  class="font-label text-[12px] tracking-[0.1em] uppercase text-on-surface group-hover:text-primary transition-colors"
+                  >Seve seve katılıyorum</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="hidden peer"
+                  name="attendance"
+                  type="radio"
+                  value="no"
+                />
+                <div
+                  class="w-5 h-5 border border-outline-variant peer-checked:bg-error transition-all"
+                ></div>
+                <span
+                  class="font-label text-[12px] tracking-[0.1em] uppercase text-on-surface group-hover:text-primary transition-colors"
+                  >Maalesef katılamıyorum</span
+                >
+              </label>
+            </div>
+          </div>
+          <div class="relative">
+            <label
+              class="font-label text-[10px] tracking-[0.2em] uppercase text-on-surface-variant absolute -top-6 left-0"
+              for="rsvp-name"
+              >Ad soyad</label
+            >
+            <input
+              id="rsvp-name"
+              name="rsvp_name"
+              autocomplete="name"
+              class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:border-secondary focus:ring-0 px-0 py-4 transition-all text-on-surface placeholder:text-outline-variant/50 placeholder:font-light"
+              placeholder="Davetiyede göründüğü gibi"
+              type="text"
+            />
+          </div>
+          <div class="relative">
+            <label
+              class="font-label text-[10px] tracking-[0.2em] uppercase text-on-surface-variant absolute -top-6 left-0"
+              for="rsvp-guests"
+              >Toplam kişi sayısı</label
+            >
+            <input
+              id="rsvp-guests"
+              name="rsvp_guests"
+              min="1"
+              max="99"
+              value="1"
+              class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:border-secondary focus:ring-0 px-0 py-4 transition-all text-on-surface"
+              type="number"
+            />
+            <p
+              id="rsvp-guests-hint"
+              class="js-rsvp-guests-hint mt-2 font-body text-xs text-on-surface-variant/80"
+            >
+              Lütfen yazan kişi dahil toplam kişi sayısını yazın.
+            </p>
+          </div>
+          <div class="flex flex-col items-center pt-2">
+            <p
+              id="rsvp-error"
+              class="js-rsvp-error mb-4 text-center font-body text-sm text-error"
+              role="alert"
+              hidden
+              style="display: none"
+            ></p>
+            <button
+              class="bg-primary text-on-primary w-full md:w-auto px-16 py-5 font-sans text-[10px] tracking-[0.3em] uppercase hover:bg-primary-dim transition-all active:scale-[0.98]"
+              type="submit"
+            >
+              WhatsApp ile gönder
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="yuva-section-seam yuva-section-seam--plum-mist" aria-hidden="true"></div>
+    </section>
+    <!-- Editorial Couple Section -->
+    <section
+      class="yuva-toned-section yuva-section-mist relative overflow-hidden px-6 pt-24 pb-12 md:pt-28 md:pb-16"
+      id="story"
+    >
+      <div class="pointer-events-none absolute left-6 top-14 z-[1] block opacity-44">
+        <svg
+          aria-hidden="true"
+          class="yuva-svg-black h-20 w-20"
+          fill="none"
+          viewBox="0 0 96 96"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="36" cy="48" r="14" stroke="currentColor" stroke-width="1" />
+          <circle cx="56" cy="48" r="14" stroke="currentColor" stroke-width="1" />
+          <path d="M46 34V62" stroke="currentColor" stroke-width="1" />
+        </svg>
+      </div>
+      <div class="max-w-7xl mx-auto" data-luxury2-reveal data-reveal-delay="2">
+        <div class="mx-auto max-w-5xl">
+          <div class="yuva-story-photo relative group">
+            <img
+              class="mx-auto h-[600px] w-full max-w-3xl object-cover object-center shadow-2xl"
+              alt="Emine ve Yahya, plajda siyah beyaz düğün fotoğrafı"
+              src="assets/photo-2-plaj.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="mx-auto mt-10 max-w-2xl text-center">
+            <h2 class="serif text-4xl text-primary mb-4">Nur &amp; Can</h2>
+            <p
+              class="font-body text-sm text-on-surface-variant leading-relaxed"
+            >
+              Biz, sevgimizi ve biriktirdiğimiz güzel anıları hayatımızın en
+              anlamlı günlerinden birinde sevdiklerimizle paylaşmanın
+              mutluluğunu yaşıyoruz.
+            </p>
+          </div>
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div
+              class="yuva-surface p-8 text-center"
+            >
+              <div class="mb-4 flex justify-center yuva-svg-black-fine">
+                <svg
+                  aria-hidden="true"
+                  class="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16 8.2C17.9 8.2 19.4 9.7 19.4 11.6C19.4 13.5 17.9 15 16 15C14.1 15 12.6 13.5 12.6 11.6C12.6 9.7 14.1 8.2 16 8.2Z"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.4 11.5C11.1 8.5 13.3 6.8 16 6.8C18.7 6.8 20.9 8.5 21.6 11.5"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 16.8L11.4 23.8H20.6L16 16.8Z"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M13.8 20.1H18.2"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <p
+                class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-3"
+              >
+                Gelin Ailesi
+              </p>
+              <h3 class="serif text-3xl text-primary mb-5">Tunç Ailesi</h3>
+              <div class="space-y-3 font-body text-sm text-on-surface-variant">
+                <p>Türkân &amp; Ömer Tunç</p>
+              </div>
+            </div>
+            <div
+              class="yuva-surface p-8 text-center"
+            >
+              <div class="mb-4 flex justify-center yuva-svg-black-fine">
+                <svg
+                  aria-hidden="true"
+                  class="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16 8.2C17.9 8.2 19.4 9.7 19.4 11.6C19.4 13.5 17.9 15 16 15C14.1 15 12.6 13.5 12.6 11.6C12.6 9.7 14.1 8.2 16 8.2Z"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.6 23.8V18.5C11.6 17.6 12.3 16.8 13.3 16.8H18.7C19.7 16.8 20.4 17.6 20.4 18.5V23.8"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 16.8L13.6 19.3L16 20.9L18.4 19.3L16 16.8Z"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M13 23.8H19"
+                    stroke="currentColor"
+                    stroke-width="1.15"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <p
+                class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-3"
+              >
+                Damat Ailesi
+              </p>
+              <h3 class="serif text-3xl text-primary mb-5">Göksu Ailesi</h3>
+              <div class="space-y-3 font-body text-sm text-on-surface-variant">
+                <p>Beyhan &amp; Şenel Göksu</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="yuva-section-seam yuva-section-seam--mist-forest" aria-hidden="true"></div>
+    </section>
+    <!-- Gallery Preview -->
+    <section
+      class="yuva-toned-section yuva-section-forest relative overflow-hidden px-6 pt-12 pb-16 md:pt-16 md:pb-20"
+      id="gallery"
+    >
+      <div class="max-w-7xl mx-auto" data-luxury2-reveal data-reveal-delay="2">
+        <div class="mb-12 text-center">
+          <p class="font-label text-[10px] uppercase tracking-[0.38em] text-secondary">
+            Nur &amp; Can
+          </p>
+          <h2 class="serif mt-4 text-4xl text-primary md:text-5xl">
+            Birlikte en güzel halleri
+          </h2>
+          <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-on-surface-variant">
+            Gülüşümüzü, heyecanımızı ve birlikteyken hissettiğimiz huzuru
+            yansıtan bizim için çok özel kareleri burada paylaşıyoruz.
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:grid-rows-2 [grid-auto-rows:minmax(0,auto)]"
+        >
+          <figure class="yuva-gallery-photo lg:col-span-5 lg:row-span-2">
+            <img
+              class="luxury2-gallery-image h-[620px] w-full object-cover object-center"
+              alt="Emine ve Yahya, bahçe düğününde"
+              src="assets/photo-3-dugun-bahce.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure
+            class="yuva-gallery-photo lg:col-start-6 lg:col-span-3 lg:row-start-1"
+          >
+            <img
+              class="luxury2-gallery-image h-[300px] w-full object-cover object-top"
+              alt="Emine, kız isteme töreninde"
+              src="assets/photo-4-kiz-isteme.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure
+            class="yuva-gallery-photo lg:col-start-9 lg:col-span-4 lg:row-start-1"
+          >
+            <img
+              class="luxury2-gallery-image h-[294px] w-full object-cover object-center"
+              alt="Emine ve Yahya, neon ışıklı söz alanında"
+              src="assets/photo-5-neon.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure
+            class="yuva-gallery-photo lg:col-start-6 lg:col-span-7 lg:row-start-2"
+          >
+            <img
+              class="luxury2-gallery-image h-[294px] w-full object-cover object-top"
+              alt="Emine ve Yahya, Boğaz köprüsünde ışık gösterisi"
+              src="assets/photo-1-bogazici.png"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+        <div class="mt-8 flex justify-center">
+          <svg
+            aria-hidden="true"
+            class="yuva-svg-black-fine h-5 w-44"
+            fill="none"
+            viewBox="0 0 176 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M6 10H68" stroke="currentColor" stroke-width="1" />
+            <path d="M108 10H170" stroke="currentColor" stroke-width="1" />
+            <circle cx="88" cy="10" r="4" stroke="currentColor" stroke-width="1" />
+          </svg>
+        </div>
+      </div>
+      <div class="yuva-section-seam yuva-section-seam--forest-footer" aria-hidden="true"></div>
+    </section>
+    <!-- Footer -->
+    <footer class="yuva-toned-section yuva-section-footer relative overflow-hidden px-8 pb-24 pt-14 md:pb-28 md:pt-16">
+      <div
+        class="max-w-7xl mx-auto"
+        data-luxury2-reveal
+        data-reveal-delay="3"
+      >
+        <div class="yuva-footer-panel mx-auto max-w-4xl px-8 py-12 text-center md:px-14 md:py-16">
+          <div class="mb-7 flex justify-center">
+            <div
+              class="yuva-footer-monogram"
+              role="img"
+              aria-label="Düğün buketi süsü"
+            >
+              <img
+                src="assets/falez-footer-bouquet.png"
+                alt=""
+                width="180"
+                height="220"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+          <p class="font-label text-[10px] uppercase tracking-[0.38em] text-secondary">
+            Son Not
+          </p>
+          <h2 class="serif mt-5 text-3xl text-primary md:text-5xl">
+            Hikayemizin bir parçası olduğunuz için teşekkür ederiz.
+          </h2>
+          <p class="mx-auto mt-6 max-w-2xl text-sm leading-7 text-on-surface-variant md:text-[15px]">
+            Bu özel günü sizinle paylaşmak bizim için çok değerli. Sevginiz,
+            iyi dilekleriniz ve yanımızda olmanız kalbimizde hep özel bir yer
+            taşıyacak.
+          </p>
+          <div class="mt-8 flex justify-center yuva-svg-black-fine">
+            <svg
+              aria-hidden="true"
+              class="h-5 w-24"
+              fill="none"
+              viewBox="0 0 96 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M6 10H34" stroke="currentColor" stroke-width="0.9" />
+              <path d="M62 10H90" stroke="currentColor" stroke-width="0.9" />
+              <path
+                d="M48 6.6C49.3 5 52 5 53.2 6.5C54.4 7.9 54 10.1 52.4 11.5L48 15L43.6 11.5C42 10.1 41.6 7.9 42.8 6.5C44 5 46.7 5 48 6.6Z"
+                stroke="currentColor"
+                stroke-width="0.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div class="yuva-footer-names mt-10 serif text-3xl md:text-5xl">
+            Nur <span class="px-2 text-primary/70">&amp;</span> Can
+          </div>
+          <p class="mt-4 font-label text-[10px] uppercase tracking-[0.34em] text-on-surface-variant">
+            24 Temmuz 2026
+          </p>
+        </div>
+      </div>
+    </footer>
+    <audio id="pageAudio" loop preload="auto">
+      <source src="/river-flows-in-you.mp3" type="audio/mpeg" />
+    </audio>
+    <button
+      class="music-toggle-lux2 music-toggle-lux2--hidden is-paused"
+      id="musicToggle"
+      type="button"
+      aria-label="Arka plan müziğini aç"
+    >
+      <span class="music-toggle-lux2__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+          <path d="M11 5 6.8 8.5H3.5v7H6.8L11 19z"></path>
+          <path d="M15 9.5a4 4 0 0 1 0 5"></path>
+          <path d="M17.8 7a7.5 7.5 0 0 1 0 10"></path>
+        </svg>
+      </span>
+    </button>
+    <script>
+      (function () {
+        var scratchCanvases = Array.prototype.slice.call(
+          document.querySelectorAll(".falez-countdown-scratch")
+        );
+        if (!scratchCanvases.length) {
+          return;
+        }
+        scratchCanvases.forEach(function (canvas) {
+          var ctx = canvas.getContext("2d");
+          if (!ctx) {
+            return;
+          }
+          var shellImage = new Image();
+          shellImage.src = canvas.getAttribute("data-scratch-shell") || "";
+          function resizeCanvas() {
+            var rect = canvas.getBoundingClientRect();
+            var ratio = window.devicePixelRatio || 1;
+            canvas.width = Math.max(1, Math.round(rect.width * ratio));
+            canvas.height = Math.max(1, Math.round(rect.height * ratio));
+            ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+            drawShell();
+          }
+          function drawShell() {
+            var rect = canvas.getBoundingClientRect();
+            ctx.clearRect(0, 0, rect.width, rect.height);
+            if (!shellImage.complete || !shellImage.naturalWidth) {
+              return;
+            }
+            var availableWidth = rect.width * 1.08;
+            var availableHeight = rect.height * 1.08;
+            var nw = shellImage.naturalWidth;
+            var nh = shellImage.naturalHeight;
+            /* 90° sola: sığdırırken genişlik/yükseklik rol değiştirir */
+            var scale = Math.min(availableWidth / nh, availableHeight / nw);
+            var drawWidth = nw * scale;
+            var drawHeight = nh * scale;
+            var cx = rect.width / 2;
+            var cy = rect.height / 2;
+            ctx.save();
+            ctx.globalCompositeOperation = "source-over";
+            ctx.translate(cx, cy);
+            ctx.rotate(-Math.PI / 2);
+            ctx.drawImage(shellImage, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
+            ctx.restore();
+          }
+          function scratchAt(clientX, clientY) {
+            var rect = canvas.getBoundingClientRect();
+            var x = clientX - rect.left;
+            var y = clientY - rect.top;
+            var radius = Math.max(10, Math.min(rect.width, rect.height) * 0.08);
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          var isScratching = false;
+          canvas.addEventListener("pointerdown", function (event) {
+            isScratching = true;
+            canvas.setPointerCapture(event.pointerId);
+            scratchAt(event.clientX, event.clientY);
+          });
+          canvas.addEventListener("pointermove", function (event) {
+            if (!isScratching) {
+              return;
+            }
+            scratchAt(event.clientX, event.clientY);
+          });
+          function stopScratching(event) {
+            if (event && canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
+              canvas.releasePointerCapture(event.pointerId);
+            }
+            isScratching = false;
+          }
+          canvas.addEventListener("pointerup", stopScratching);
+          canvas.addEventListener("pointercancel", stopScratching);
+          canvas.addEventListener("pointerleave", function (event) {
+            if (event.buttons === 0) {
+              stopScratching(event);
+            }
+          });
+          shellImage.addEventListener("load", resizeCanvas);
+          window.addEventListener("resize", resizeCanvas);
+          resizeCanvas();
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        function pad(n) {
+          return String(n).padStart(2, "0");
+        }
+      
+        var pageAudio = document.getElementById("pageAudio");
+        var musicToggle = document.getElementById("musicToggle");
+        var nav = document.getElementById("luxury2Nav");
+        var isAudioPlaying = false;
+      
+        function updateNavState() {
+          if (!nav) {
+            return;
+          }
+          nav.classList.toggle("is-scrolled", window.scrollY > 36);
+        }
+      
+        function updateMusicButton() {
+          if (!musicToggle) {
+            return;
+          }
+          musicToggle.classList.toggle("is-paused", !isAudioPlaying);
+          musicToggle.classList.toggle("is-playing", isAudioPlaying);
+          musicToggle.setAttribute("aria-pressed", String(isAudioPlaying));
+          musicToggle.setAttribute(
+            "aria-label",
+            isAudioPlaying ? "Arka plan müziğini kapat" : "Arka plan müziğini aç"
+          );
+          musicToggle.setAttribute(
+            "title",
+            isAudioPlaying ? "Arka plan müziğini kapat" : "Arka plan müziğini aç"
+          );
+        }
+      
+        function showMusicButton() {
+          if (!musicToggle) {
+            return;
+          }
+          musicToggle.classList.remove("music-toggle-lux2--hidden");
+        }
+      
+        function playMusic() {
+          if (!pageAudio) {
+            return;
+          }
+          var p = pageAudio.play();
+          if (p !== undefined && typeof p.then === "function") {
+            p.then(function () {
+              isAudioPlaying = true;
+              updateMusicButton();
+            }).catch(function () {
+              isAudioPlaying = false;
+              updateMusicButton();
+            });
+          } else {
+            isAudioPlaying = true;
+            updateMusicButton();
+          }
+        }
+      
+        function pauseMusic() {
+          if (!pageAudio) {
+            return;
+          }
+          pageAudio.pause();
+          isAudioPlaying = false;
+          updateMusicButton();
+        }
+      
+        if (musicToggle) {
+          musicToggle.addEventListener("click", function () {
+            if (isAudioPlaying) {
+              pauseMusic();
+              return;
+            }
+            playMusic();
+          });
+          updateMusicButton();
+        }
+      
+        if (nav) {
+          updateNavState();
+          window.addEventListener("scroll", updateNavState, { passive: true });
+        }
+      
+        var loader = document.getElementById("luxury2-loader");
+        var loaderVideo = loader ? loader.querySelector("video") : null;
+        var inlineGate = loader && loader.getAttribute("data-inline-gate") === "true";
+        var gateEnabled = window.__weddingInvitationGateEnabled === true;
+      
+        if (loader && loaderVideo && inlineGate) {
+          try {
+            loaderVideo.muted = true;
+          } catch (muteErr) {}
+          // Not: loadeddata'da pause() çağırmıyoruz — mobilde play() sırasında
+          // loadeddata gelirse videoyu durduruyor ve 1 saniyelik kesintiye yol açıyor.
+        }
+      
+        var minDisplayMs = 950;
+        if (loader) {
+          var customMs = loader.getAttribute("data-min-display-ms");
+          if (customMs != null && customMs !== "") {
+            var parsed = parseInt(customMs, 10);
+            if (!isNaN(parsed) && parsed >= 0) {
+              minDisplayMs = parsed;
+            }
+          }
+        }
+        var shownAt = 0;
+        var loaderSequenceStarted = false;
+      
+        function hideLoader() {
+          if (!loader || loader.classList.contains("luxury2-loader--hide")) {
+            return;
+          }
+          var elapsed =
+            (typeof performance !== "undefined" ? performance.now() : Date.now()) - shownAt;
+          var rest = Math.max(0, minDisplayMs - elapsed);
+          window.setTimeout(function () {
+            loader.classList.add("luxury2-loader--hide");
+            window.setTimeout(function () {
+              if (loader.parentNode) {
+                loader.setAttribute("aria-busy", "false");
+                loader.parentNode.removeChild(loader);
+              }
+              showMusicButton();
+              if (pageAudio) {
+                window.setTimeout(playMusic, 120);
+              }
+            }, 600);
+          }, rest);
+        }
+      
+        function startLoaderSequence() {
+          if (!loader || loaderSequenceStarted) {
+            return;
+          }
+      
+          loaderSequenceStarted = true;
+          shownAt = typeof performance !== "undefined" ? performance.now() : Date.now();
+      
+          if (!loaderVideo) {
+            hideLoader();
+            return;
+          }
+      
+          var loadingIndicator = document.createElement("div");
+          loadingIndicator.setAttribute("aria-hidden", "true");
+          loadingIndicator.style.cssText =
+            "position:absolute;bottom:38%;left:50%;transform:translateX(-50%);" +
+            "color:rgba(255,255,255,0.85);font-family:sans-serif;font-size:13px;" +
+            "letter-spacing:0.2em;text-transform:uppercase;text-align:center;" +
+            "pointer-events:none;white-space:nowrap;z-index:10;";
+          loadingIndicator.textContent = "Yükleniyor…";
+          loader.appendChild(loadingIndicator);
+      
+          function removeLoadingIndicator() {
+            if (loadingIndicator && loadingIndicator.parentNode) {
+              loadingIndicator.parentNode.removeChild(loadingIndicator);
+            }
+          }
+      
+          function handleLoaderVideoEnded() {
+            removeLoadingIndicator();
+            hideLoader();
+          }
+      
+          function handleLoaderVideoFailure() {
+            removeLoadingIndicator();
+            window.setTimeout(hideLoader, Math.max(0, minDisplayMs));
+          }
+      
+          // Video gerçekten frame basmaya başlayınca: yükleniyor yaz, CSS blur kaldır.
+          function onPlaying() {
+            removeLoadingIndicator();
+            loader.classList.remove("luxury2-loader--awaiting-tap");
+            loader.classList.add("luxury2-loader--playing");
+          }
+      
+          // Eğer 10 saniyede video başlamazsa hero'ya geç.
+          var playTimeout = window.setTimeout(function () {
+            loaderVideo.removeEventListener("playing", onPlaying);
+            handleLoaderVideoFailure();
+          }, 10000);
+      
+          loaderVideo.addEventListener("playing", function () {
+            window.clearTimeout(playTimeout);
+            onPlaying();
+          }, { once: true });
+      
+          // "ended" ve "error" dinleyicilerini play()'den ÖNCE ekliyoruz,
+          // ama "abort" eklemiyoruz — load() çağrısı abort fırlatır ve anında kapanır.
+          loaderVideo.addEventListener("ended", handleLoaderVideoEnded, { once: true });
+          loaderVideo.addEventListener("error", handleLoaderVideoFailure, { once: true });
+      
+          try {
+            loaderVideo.currentTime = 0;
+          } catch (e) {}
+      
+          var playPromise = loaderVideo.play();
+          if (playPromise !== undefined && typeof playPromise.then === "function") {
+            playPromise.catch(function () {
+              window.clearTimeout(playTimeout);
+              loaderVideo.removeEventListener("playing", onPlaying);
+              handleLoaderVideoFailure();
+            });
+          }
+        }
+      
+        function runAfterInvitationOpened(callback) {
+          if (!gateEnabled || window.__weddingInvitationOpened === true) {
+            callback();
+            return;
+          }
+      
+          function handleInvitationOpen() {
+            window.removeEventListener("wedding:open", handleInvitationOpen);
+            callback();
+          }
+      
+          window.addEventListener("wedding:open", handleInvitationOpen);
+        }
+      
+        if (loader) {
+          if (document.readyState === "complete") {
+            runAfterInvitationOpened(startLoaderSequence);
+          } else {
+            window.addEventListener("load", function () {
+              runAfterInvitationOpened(startLoaderSequence);
+            });
+          }
+        } else if (pageAudio) {
+          function tryAutoplayWithoutLoader() {
+            showMusicButton();
+            window.setTimeout(playMusic, 400);
+          }
+          if (document.readyState === "complete") {
+            runAfterInvitationOpened(tryAutoplayWithoutLoader);
+          } else {
+            window.addEventListener("load", function () {
+              runAfterInvitationOpened(tryAutoplayWithoutLoader);
+            });
+          }
+        } else {
+          showMusicButton();
+        }
+      
+        var revealElements = Array.prototype.slice.call(
+          document.querySelectorAll("[data-luxury2-reveal]")
+        );
+        if (revealElements.length) {
+          var reduceMotion =
+            typeof window.matchMedia === "function" &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      
+          if (reduceMotion || typeof window.IntersectionObserver !== "function") {
+            revealElements.forEach(function (element) {
+              element.classList.add("is-visible");
+            });
+          } else {
+            var revealObserver = new IntersectionObserver(
+              function (entries, observer) {
+                entries.forEach(function (entry) {
+                  if (!entry.isIntersecting) {
+                    return;
+                  }
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                });
+              },
+              {
+                threshold: 0.16,
+                rootMargin: "0px 0px -8% 0px",
+              }
+            );
+      
+            revealElements.forEach(function (element) {
+              revealObserver.observe(element);
+            });
+          }
+        }
+      
+        var countdownEl = document.querySelector("[data-countdown]");
+        if (countdownEl && countdownEl.dataset.countdown) {
+          var target = new Date(countdownEl.dataset.countdown).getTime();
+          function tick() {
+            var diff = Math.max(0, target - Date.now());
+            var total = Math.floor(diff / 1000);
+            var days = Math.floor(total / 86400);
+            var hours = Math.floor((total % 86400) / 3600);
+            var minutes = Math.floor((total % 3600) / 60);
+            var seconds = total % 60;
+      
+            var dEl = countdownEl.querySelector('[data-unit="days"]');
+            var hEl = countdownEl.querySelector('[data-unit="hours"]');
+            var mEl = countdownEl.querySelector('[data-unit="minutes"]');
+            var sEl = countdownEl.querySelector('[data-unit="seconds"]');
+            if (dEl) {
+              dEl.textContent = String(days);
+            }
+            if (hEl) {
+              hEl.textContent = pad(hours);
+            }
+            if (mEl) {
+              mEl.textContent = pad(minutes);
+            }
+            if (sEl) {
+              sEl.textContent = pad(seconds);
+            }
+          }
+          tick();
+          window.setInterval(tick, 1000);
+        }
+      })();
+      
+    </script>
+<script src="assets/rsvp-whatsapp.js" defer></script>
+  </body>
+</html>
